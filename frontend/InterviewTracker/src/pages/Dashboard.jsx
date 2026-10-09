@@ -90,7 +90,7 @@ return ( <div> <Navbar />
       </button>
     </section>
 
-    <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {/* <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 <StatsCard title="Total Questions" value={questions.length} />
 
 <StatsCard
@@ -114,8 +114,48 @@ return ( <div> <Navbar />
         )}%`
       : "0%"
   }
+  
 />
-    </section>
+
+    </section> */}
+
+{/* Preparation Progress */}
+<section className="mt-6 rounded-xl border border-[#E7E2DC] bg-white p-5">
+  
+<div className="mb-3 flex items-center justify-between">
+    <h3 className="font-semibold text-[#1F2937]">
+      Preparation Progress
+    </h3>
+
+    <span className="text-sm font-semibold text-[#C26A3D]">
+      {questions.length
+        ? Math.round(
+            (questions.filter((q) => q.status === "Completed").length /
+              questions.length) * 100
+          )
+        : 0}%
+    </span>
+  </div>
+
+  <div className="h-3 overflow-hidden rounded-full bg-[#F7F5F2]">
+    <div
+      className="h-full rounded-full bg-[#C26A3D] transition-all duration-300"
+      style={{
+        width: `${
+          questions.length
+            ? (questions.filter((q) => q.status === "Completed").length /
+                questions.length) * 100
+            : 0
+        }%`,
+      }}
+    />
+  </div>
+
+  <p className="mt-2 text-sm text-[#6B7280]">
+    {questions.filter((q) => q.status === "Completed").length} of{" "}
+    {questions.length} questions completed
+  </p>
+</section>
 
 {showForm && (
   <QuestionForm
